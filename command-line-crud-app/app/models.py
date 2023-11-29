@@ -1,47 +1,46 @@
 from django.db import models
 
 # Create your models here.
-class Games(models.Model):
+class Movies(models.Model):
     name = models.TextField()
-    release_year = models.IntegerField()
-    main_genre = models.TextField()
-    developer = models.TextField()
+    release_date = models.IntegerField()
     main_character = models.TextField()
 
 
 #Create
-def add_game(name,release_date,genres,dev,main_character):
-    game = Games(name=name,release_year=release_date,main_genre=genres,developer=dev,main_character=main_character)
-    game.save()
-    return game
+def add_movie(name,release_date,main_character):
+    movie = Movies(name=name,release_date=release_date,main_character=main_character)
+    movie.save()
+    return movie
 
 #__________Read__________
 #Read all
 def view_All():
-    game = Games.objects.all()
-    return game
-#Read Publisher
-def view_by_publisher(dev):
-    game = Games.objects.filter(developer=dev)
-    return game
-#Read by game name
+    movie = Movies.objects.all()
+    return movie
 
-def view_by_game_name(game_name):
+#Read Publisher
+def view_by_date(release_date):
+    movie = Movies.objects.filter(release_date=release_date)
+    return movie
+#Read by movie name
+
+def view_by_movie_name(movie_name):
     try:
-        game = Games.objects.get(name=game_name)
-        return game
+        movie = Movies.objects.get(name=movie_name)
+        return movie
     except:
         return None
     
 #Update
-def update_publisher(game_name, new_publisher):
-    game = Games.objects.get(name=game_name)
-    game.developer = new_publisher
-    game.save()
-    return game
+def update_release(movie_name, new_release):
+     movie = Movies.objects.get(name=movie_name)
+     movie.release_date = new_release
+     movie.save()
+     return movie
 
 #Delete
-def delete_game(game_name):
-    game = Games.objects.get(name=game_name)
-    game.delete()
-    return game
+def delete_movie(movie_name):
+    movie = Movies.objects.get(name=movie_name)
+    movie.delete()
+    return movie
